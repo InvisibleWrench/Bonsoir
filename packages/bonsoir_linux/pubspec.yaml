@@ -7,7 +7,6 @@ version: 5.1.3
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=3.7.0"
 
 flutter:
   plugin:
@@ -17,8 +16,6 @@ flutter:
         dartPluginClass: BonsoirLinux
 
 dependencies:
-  flutter:
-    sdk: flutter
   bonsoir_platform_interface: ^5.1.3
   dbus: ^0.7.10
   meta: ^1.8.0
