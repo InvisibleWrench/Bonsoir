@@ -4,7 +4,6 @@ import 'package:bonsoir_platform_interface/src/service/service.dart';
 class ResolvedBonsoirService extends BonsoirService {
   /// The service host.
   final String? host;
-  final String? address;
 
   /// Creates a new resolved Bonsoir service.
   ResolvedBonsoirService({
@@ -13,7 +12,6 @@ class ResolvedBonsoirService extends BonsoirService {
     required super.port,
     super.attributes,
     required this.host,
-    required this.address,
   });
 
   /// Creates a new resolved Bonsoir service.
@@ -26,7 +24,6 @@ class ResolvedBonsoirService extends BonsoirService {
     required super.port,
     super.attributes,
     required this.host,
-    required this.address,
   });
 
   /// Creates a new resolved Bonsoir service instance from the given JSON map.
@@ -39,7 +36,6 @@ class ResolvedBonsoirService extends BonsoirService {
           port: json['${prefix}port'],
           attributes: Map<String, String>.from(json['${prefix}attributes']),
           host: json['${prefix}host'],
-          address: json['${prefix}address'],
         );
 
   @override

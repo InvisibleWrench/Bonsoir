@@ -194,7 +194,6 @@ class AvahiBonsoirDiscovery extends AvahiBonsoirAction<BonsoirDiscoveryEvent> wi
       name: event.serviceName,
       type: event.type,
       host: event.host,
-      address: event.address,
       port: event.port,
       attributes: Map.fromEntries(
         event.txt.map((entry) {
