@@ -190,6 +190,18 @@ class AvahiBonsoirDiscovery extends AvahiBonsoirAction<BonsoirDiscoveryEvent> wi
   /// Triggered when a service has been resolved.
   void _onServiceResolved(DBusSignal signal) {
     AvahiServiceResolverFound event = AvahiServiceResolverFound(signal);
+    print("resolved name: ${event.serviceName}");
+    print("resolved type: ${event.type}");
+    print("resolved protocol: ${event.protocol}");
+    print("resolved host: ${event.host}");
+    print("resolved address: ${event.address}");
+    print("resolved port: ${event.port}");
+    print("resolved domain: ${event.domain}");
+    print("resolved intf value: ${event.interfaceValue}");
+    
+
+
+
     BonsoirService service = ResolvedBonsoirService(
       name: event.serviceName,
       type: event.type,
