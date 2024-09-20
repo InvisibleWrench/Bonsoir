@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:collection/collection.dart';
 
 import 'package:bonsoir_linux/bonsoir_linux.dart';
 import 'package:bonsoir_linux/src/actions/action.dart';
@@ -12,7 +13,7 @@ import 'package:bonsoir_linux/src/avahi/service_resolver.dart';
 import 'package:bonsoir_linux/src/service.dart';
 import 'package:bonsoir_platform_interface/bonsoir_platform_interface.dart';
 import 'package:dbus/dbus.dart';
-import 'package:flutter/foundation.dart';
+
 
 /// Allows to register subscriptions.
 typedef SubscriptionRegisterer = Function(String name, StreamSubscription subscription);
@@ -192,7 +193,7 @@ class AvahiBonsoirDiscovery extends AvahiBonsoirAction<BonsoirDiscoveryEvent> wi
     BonsoirService service = ResolvedBonsoirService(
       name: event.serviceName,
       type: event.type,
-      host: event.address,
+      host: event.host,
       port: event.port,
       attributes: Map.fromEntries(
         event.txt.map((entry) {
@@ -226,7 +227,7 @@ class AvahiBonsoirDiscovery extends AvahiBonsoirAction<BonsoirDiscoveryEvent> wi
     }
 
     Map<String, String> attributes = _parseTXTRecordData(event.rdata);
-    if (!mapEquals(service.attributes, attributes)) {
+    if (!DeepCollectionEquality().equals(service.attributes, attributes)) {
       log(logMessages['discoveryTxtResolved']!, parameters: [service.description, attributes]);
       onEvent(BonsoirDiscoveryEvent(type: BonsoirDiscoveryEventType.discoveryServiceLost, service: service));
       AvahiServiceBrowserItemNew serviceEvent = _foundServices[service]!;
@@ -289,7 +290,7 @@ class AvahiBonsoirDiscovery extends AvahiBonsoirAction<BonsoirDiscoveryEvent> wi
   /// Parse a TXT record data.
   Map<String, String> _parseTXTRecordData(List<int> txtRecordData) {
     Map<String, String> result = {};
-    if (txtRecordData.isEmpty || listEquals(txtRecordData, [0])) {
+    if (txtRecordData.isEmpty || IterableEquality().equals(txtRecordData, [0])) {
       return result;
     }
 

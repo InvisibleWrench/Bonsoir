@@ -3,7 +3,6 @@ library bonsoir_linux;
 import 'package:bonsoir_linux/src/actions/broadcast.dart';
 import 'package:bonsoir_linux/src/actions/discovery/discovery.dart';
 import 'package:bonsoir_platform_interface/bonsoir_platform_interface.dart';
-import 'package:flutter/foundation.dart';
 
 /// Class for Linux implementation through Bonjour interface.
 class BonsoirLinux extends BonsoirPlatformInterface {
@@ -14,13 +13,13 @@ class BonsoirLinux extends BonsoirPlatformInterface {
   static void registerWith() => BonsoirPlatformInterface.instance = BonsoirLinux();
 
   @override
-  AvahiBonsoirBroadcast createBroadcastAction(BonsoirService service, {bool printLogs = kDebugMode}) => AvahiBonsoirBroadcast(
+  AvahiBonsoirBroadcast createBroadcastAction(BonsoirService service, {bool printLogs = false}) => AvahiBonsoirBroadcast(
         service: service,
         printLogs: printLogs,
       );
 
   @override
-  AvahiBonsoirDiscovery createDiscoveryAction(String type, {bool printLogs = kDebugMode}) => AvahiBonsoirDiscovery(
+  AvahiBonsoirDiscovery createDiscoveryAction(String type, {bool printLogs = false}) => AvahiBonsoirDiscovery(
         type: type,
         printLogs: printLogs,
       );
