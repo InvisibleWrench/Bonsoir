@@ -4,7 +4,6 @@ import 'package:bonsoir_platform_interface/src/actions/discovery.dart';
 import 'package:bonsoir_platform_interface/src/events/broadcast.dart';
 import 'package:bonsoir_platform_interface/src/events/discovery.dart';
 import 'package:bonsoir_platform_interface/src/service/service.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 /// A Bonsoir class that allows to either broadcast a service or to discover services on the network.

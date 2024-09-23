@@ -4,8 +4,8 @@ import 'dart:math';
 import 'package:bonsoir_platform_interface/src/events/event.dart';
 import 'package:bonsoir_platform_interface/src/service/service.dart';
 import 'package:meta/meta.dart';
-// import 'package:flutter/foundation.dart';
-// import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 /// This class serves as the stream source for the implementations to override.
 abstract class BonsoirAction<T extends BonsoirEvent> {
@@ -36,7 +36,7 @@ abstract class MethodChannelBonsoirAction<T extends BonsoirEvent> extends Bonsoi
   static const String _channelName = 'fr.skyost.bonsoir';
 
   /// The channel.
-  // static const MethodChannel _channel = MethodChannel(_channelName);
+  static const MethodChannel _channel = MethodChannel(_channelName);
 
   /// The class identifier.
   final int _id;
@@ -65,10 +65,10 @@ abstract class MethodChannelBonsoirAction<T extends BonsoirEvent> extends Bonsoi
 
   @override
   Future<void> get ready async {
-    // if (eventStream == null) {
-    //   await _channel.invokeMethod('$_classType.initialize', toJson());
-    //   _eventStream = EventChannel('$_channelName.$_classType.$_id').receiveBroadcastStream().map(transformPlatformEvent);
-    // }
+    if (eventStream == null) {
+      await _channel.invokeMethod('$_classType.initialize', toJson());
+      _eventStream = EventChannel('$_channelName.$_classType.$_id').receiveBroadcastStream().map(transformPlatformEvent);
+    }
   }
 
   @override
@@ -83,14 +83,13 @@ abstract class MethodChannelBonsoirAction<T extends BonsoirEvent> extends Bonsoi
     assert(isReady, '''$runtimeType should be ready to start in order to call this method.
 You must wait until this instance is ready by calling "await $runtimeType.ready".
 If you have previously called "$runtimeType.stop()" on this instance, you have to create a new instance of this class.''');
-    // return _channel.invokeMethod('$_classType.start', toJson());
-    return Future.value();
+    return _channel.invokeMethod('$_classType.start', toJson());
   }
 
   @override
   Future<void> stop() async {
-    // await _channel.invokeMethod('$_classType.stop', toJson());
-    // _isStopped = true;
+    await _channel.invokeMethod('$_classType.stop', toJson());
+    _isStopped = true;
   }
 
   /// Transforms the stream data to a [T].
@@ -105,16 +104,13 @@ If you have previously called "$runtimeType.stop()" on this instance, you have t
 
   /// Invokes a method on the method channel.
   @protected
-  Future<R?> invokeMethod<R>(String method, [Map<String, dynamic>? arguments]) {
-    // _channel.invokeMethod<R>(
-    //   '$_classType.$method',
-    //   {
-    //     ...toJson(),
-    //     if (arguments != null) ...arguments,
-    //   },
-    // );
-    return Future.value();
-  }
+  Future<R?> invokeMethod<R>(String method, [Map<String, dynamic>? arguments]) => _channel.invokeMethod<R>(
+      '$_classType.$method',
+      {
+        ...toJson(),
+        if (arguments != null) ...arguments,
+      },
+    );
 
   /// Allows to generate a random identifier.
   static int _createRandomId() => Random().nextInt(100000);
