@@ -2,7 +2,7 @@ import 'package:bonsoir_platform_interface/src/actions/action.dart';
 import 'package:bonsoir_platform_interface/src/events/broadcast.dart';
 import 'package:bonsoir_platform_interface/src/events/types/broadcast.dart';
 import 'package:bonsoir_platform_interface/src/service/service.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 /// Implementation of [MethodChannelBonsoirEvents] for the broadcast action.
 class MethodChannelBonsoirBroadcastAction extends MethodChannelBonsoirAction<BonsoirBroadcastEvent> {
@@ -12,7 +12,7 @@ class MethodChannelBonsoirBroadcastAction extends MethodChannelBonsoirAction<Bon
   /// Creates a new method channel action instance for the broadcast action.
   MethodChannelBonsoirBroadcastAction({
     required this.service,
-    super.printLogs,
+    super.printLogs = false,
   }) : super(
           classType: 'broadcast',
         );

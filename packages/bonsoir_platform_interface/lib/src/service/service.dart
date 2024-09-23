@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bonsoir_platform_interface/src/actions/action.dart';
 import 'package:bonsoir_platform_interface/src/service/normalizer.dart';
 import 'package:bonsoir_platform_interface/src/service/resolved_service.dart';
-import 'package:flutter/foundation.dart';
+import 'package:collection/collection.dart';
 
 /// Represents a broadcastable network service.
 class BonsoirService {
@@ -142,7 +142,7 @@ class BonsoirService {
     if (other is! BonsoirService) {
       return false;
     }
-    return identical(this, other) || (name == other.name && type == other.type && port == other.port && mapEquals<String, String>(attributes, other.attributes));
+    return identical(this, other) || (name == other.name && type == other.type && port == other.port && const DeepCollectionEquality().equals(attributes, other.attributes));
   }
 
   @override

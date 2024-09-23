@@ -2,7 +2,7 @@ import 'package:bonsoir_platform_interface/src/actions/action.dart';
 import 'package:bonsoir_platform_interface/src/events/discovery.dart';
 import 'package:bonsoir_platform_interface/src/events/types/discovery.dart';
 import 'package:bonsoir_platform_interface/src/service/service.dart';
-import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 /// Implementation of [MethodChannelBonsoirEvents] for the discovery action.
 class MethodChannelBonsoirDiscoveryAction extends MethodChannelBonsoirAction<BonsoirDiscoveryEvent> with ServiceResolver {
@@ -12,7 +12,7 @@ class MethodChannelBonsoirDiscoveryAction extends MethodChannelBonsoirAction<Bon
   /// Creates a new method channel action instance for the discovery action.
   MethodChannelBonsoirDiscoveryAction({
     required this.type,
-    super.printLogs,
+    super.printLogs = false,
   }) : super(
           classType: 'discovery',
         );

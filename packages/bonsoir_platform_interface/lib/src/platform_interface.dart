@@ -4,7 +4,7 @@ import 'package:bonsoir_platform_interface/src/actions/discovery.dart';
 import 'package:bonsoir_platform_interface/src/events/broadcast.dart';
 import 'package:bonsoir_platform_interface/src/events/discovery.dart';
 import 'package:bonsoir_platform_interface/src/service/service.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 /// A Bonsoir class that allows to either broadcast a service or to discover services on the network.
@@ -28,17 +28,17 @@ abstract class BonsoirPlatformInterface extends PlatformInterface {
   }
 
   /// This method returns an initialized subclass of [BonsoirAction] holding the eventStreams and other state needed for the implementations.
-  BonsoirAction<BonsoirBroadcastEvent> createBroadcastAction(BonsoirService service, {bool printLogs = kDebugMode});
+  BonsoirAction<BonsoirBroadcastEvent> createBroadcastAction(BonsoirService service, {bool printLogs = false});
 
   /// This method returns an initialized subclass of [BonsoirAction] holding the eventStreams and other state needed for the implementations.
-  BonsoirAction<BonsoirDiscoveryEvent> createDiscoveryAction(String type, {bool printLogs = kDebugMode});
+  BonsoirAction<BonsoirDiscoveryEvent> createDiscoveryAction(String type, {bool printLogs = false});
 }
 
 /// A Bonsoir class that allows to either broadcast a service or to discover services on the network using a method channel.
 class MethodChannelBonsoir extends BonsoirPlatformInterface {
   @override
-  BonsoirAction<BonsoirBroadcastEvent> createBroadcastAction(BonsoirService service, {bool printLogs = kDebugMode}) => MethodChannelBonsoirBroadcastAction(service: service, printLogs: printLogs);
+  BonsoirAction<BonsoirBroadcastEvent> createBroadcastAction(BonsoirService service, {bool printLogs = false}) => MethodChannelBonsoirBroadcastAction(service: service, printLogs: printLogs);
 
   @override
-  BonsoirAction<BonsoirDiscoveryEvent> createDiscoveryAction(String type, {bool printLogs = kDebugMode}) => MethodChannelBonsoirDiscoveryAction(type: type, printLogs: printLogs);
+  BonsoirAction<BonsoirDiscoveryEvent> createDiscoveryAction(String type, {bool printLogs = false}) => MethodChannelBonsoirDiscoveryAction(type: type, printLogs: printLogs);
 }
