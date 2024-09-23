@@ -1,6 +1,5 @@
 import 'package:bonsoir/src/action_handler.dart';
 import 'package:bonsoir_platform_interface/bonsoir_platform_interface.dart';
-import 'package:flutter/foundation.dart';
 
 /// Allows to run a network discovery.
 class BonsoirDiscovery extends BonsoirActionHandler<BonsoirDiscoveryEvent> {
@@ -19,11 +18,11 @@ class BonsoirDiscovery extends BonsoirActionHandler<BonsoirDiscoveryEvent> {
 
   /// Creates a new Bonsoir discovery instance.
   factory BonsoirDiscovery({
-    bool printLogs = kDebugMode,
+    bool printLogs = false,
     required String type,
     ServiceResolver? serviceResolver,
   }) {
-    if (kDebugMode) {
+    if (printLogs) {
       String normalizedType = BonsoirServiceNormalizer.normalizeType(type);
       if (type != normalizedType) {
         print(
